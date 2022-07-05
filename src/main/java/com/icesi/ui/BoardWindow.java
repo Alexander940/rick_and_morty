@@ -25,6 +25,9 @@ public class BoardWindow extends Stage {
         }
     }
 
+    /**
+     * this method execute the actions of fxml components
+     */
     private void init() {
 
     }

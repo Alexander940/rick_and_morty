@@ -53,7 +53,6 @@ public class BoardTest {
     public void assign_the_character_to_the_portal() {
         board = new Board(2, 1, 1,0);
 
-
         assertEquals('A', board.getHead().getPortalSignature());
     }
 

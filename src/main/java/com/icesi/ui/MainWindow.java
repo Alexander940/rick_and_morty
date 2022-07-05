@@ -6,35 +6,35 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 
-
-/**
- * @author alexanderecheverry
- * @version 1.0
- */
 public class MainWindow extends Stage {
 
-    private ImageView imageView;
-    private Button startGameBtn;
+    ImageView imageView;
+    Button signUpBtn, logInBtn;
+    AnchorPane panel;
 
     public MainWindow() {
-        try{
+        try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/MainWindow.fxml"));
             Parent root = loader.load();
 
             imageView = (ImageView) loader.getNamespace().get("imageView");
-            startGameBtn = (Button) loader.getNamespace().get("startGameBtn");
+            signUpBtn = (Button) loader.getNamespace().get("signUpBtn");
+            logInBtn = (Button) loader.getNamespace().get("logInBtn");
+            panel = (AnchorPane) loader.getNamespace().get("panel");
 
-            Scene scene = new Scene(root, 600,400);
+            Scene scene = new Scene(root, 250,250);
             setScene(scene);
 
             init();
-        } catch (Exception exception){
-            exception.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -44,11 +44,31 @@ public class MainWindow extends Stage {
     private void init() {
         loadImage(imageView, "src/main/resources/img/image_menu_main.png");
 
-        startGameBtn.setOnAction(e -> {
+        panel.getStylesheets().clear();
+        panel.getStylesheets().add("/styles/style1.css");
 
+        logInBtn.setOnAction(event -> {
+            LoginWindow loginWindow = new LoginWindow();
+            loginWindow.show();
+
+            this.close();
         });
+
+        signUpBtn.setOnAction(event -> {
+            SignUpWindow signUpWindow = new SignUpWindow();
+            signUpWindow.show();
+
+            this.close();
+        });
+
+
     }
 
+    /**
+     * This method load an image into an image view
+     * @param iv This is the image view
+     * @param path This is the path of the image
+     */
     private void loadImage(ImageView iv, String path){
         try{
             File file = new File(path);

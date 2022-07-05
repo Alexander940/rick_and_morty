@@ -1,12 +1,8 @@
 package com.icesi.main;
 
-import com.icesi.connection.ConnectorDB;
+import com.icesi.ui.MainWindow;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import com.icesi.ui.MainWindow;
-
-import java.sql.Connection;
-import java.sql.SQLException;
 
 /**
  * @author alexanderecheverry
@@ -15,12 +11,6 @@ import java.sql.SQLException;
 public class Main extends Application {
 
     public static void main(String[] args) {
-        try(Connection connection = ConnectorDB.get_connection()){
-
-        }catch (SQLException exception){
-            exception.printStackTrace();
-        }
-
         launch(args);
     }
 

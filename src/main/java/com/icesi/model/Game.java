@@ -10,7 +10,7 @@ public class Game {
 
     /**
      * This method is about architecture singleton
-     * @return the instance of the same class
+     * @return the instance of the class
      */
     public static Game getInstance() {
         if(instance == null){
@@ -20,8 +20,34 @@ public class Game {
     }
 
     private Board board;
+    private User principalPlayer;
+    private User secondPlayer;
 
     public void createBoard(int rows, int columns, int portalNumber, int seedNumber){
         board = new Board(rows, columns, portalNumber, seedNumber);
+    }
+
+    public Board getBoard() {
+        return board;
+    }
+
+    public void setBoard(Board board) {
+        this.board = board;
+    }
+
+    public User getPrincipalPlayer() {
+        return principalPlayer;
+    }
+
+    public void setPrincipalPlayer(User principalPlayer) {
+        this.principalPlayer = principalPlayer;
+    }
+
+    public User getSecondPlayer() {
+        return secondPlayer;
+    }
+
+    public void setSecondPlayer(User secondPlayer) {
+        this.secondPlayer = secondPlayer;
     }
 }

@@ -1,6 +1,6 @@
 package com.icesi.ui;
 
-import com.icesi.service.Alert;
+import com.icesi.util.AlertUtil;
 import com.icesi.model.Game;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -53,14 +53,14 @@ public class GameWindow extends Stage {
     private void init() {
         loadImage(imageView, "src/main/resources/img/image_menu_main.png");
         hiLabel.setTextAlignment(TextAlignment.CENTER);
-        hiLabel.setText("Hello, " + Game.getInstance().getPrincipalPlayer().getName());
+        hiLabel.setText("Hello, " + Game.getInstance().getFirstPlayer().getName());
 
         startGameBtn.setOnAction(e -> {
-            if(Game.getInstance().getPrincipalPlayer() != null) {
-                OptionsGameWindow optionsGameWindow = new OptionsGameWindow();
+            if(Game.getInstance().getFirstPlayer() != null) {
+                LoginSecondPlayerWindow optionsGameWindow = new LoginSecondPlayerWindow();
                 optionsGameWindow.show();
             } else {
-                Alert.errorAlert("Wrong", "You should login before to init a game", "");
+                AlertUtil.errorAlert("Wrong", "You should login before to init a game", "");
             }
         });
     }

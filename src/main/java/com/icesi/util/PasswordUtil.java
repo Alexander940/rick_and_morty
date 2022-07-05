@@ -1,4 +1,4 @@
-package com.icesi.service;
+package com.icesi.util;
 
 import org.apache.commons.lang3.RandomStringUtils;
 
@@ -7,7 +7,7 @@ import org.apache.commons.lang3.RandomStringUtils;
  * @version 1.0
  * This class contains utilities for password
  */
-public abstract class Password {
+public abstract class PasswordUtil {
 
     private final String CHARACTERS = "+*/?-_´´}{][''$%<>";
 
@@ -20,7 +20,7 @@ public abstract class Password {
      * @param password this is the password to verify
      * @return true, if the password is strong and false, if the password is weak
      */
-    public static boolean verifyPassword(String password){
+    public static boolean assessPassword(String password){
         return password.length() > 8 && password.matches("[a-zA-Z0-9]+");
     }
 

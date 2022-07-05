@@ -3,16 +3,14 @@ package com.icesi.ui;
 import com.icesi.exceptions.CouldNotCreateUserException;
 import com.icesi.exceptions.ExistsNicknameException;
 import com.icesi.exceptions.WeakPasswordException;
-import com.icesi.model.Game;
-import com.icesi.service.Password;
+import com.icesi.util.PasswordUtil;
 import com.icesi.service.UserService;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import com.icesi.service.Alert;
+import com.icesi.util.AlertUtil;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 
@@ -60,25 +58,24 @@ public class SignUpWindow extends Stage {
                 try {
                     UserService.compareNickname(nicknameTF.getText());
                     UserService.createUser(nameTF.getText(), lastnameTF.getText(), nicknameTF.getText(), emailTF.getText(), passwordTF.getText());
-                    Alert.confirmationAlert("Successful operation", "Congratulations", "Now you can play");
-                    Game.getInstance().setPrincipalPlayer(UserService.findUser(nicknameTF.getText()));
-                    GameWindow gameWindow = new GameWindow();
-                    gameWindow.show();
+                    AlertUtil.confirmationAlert("Successful operation", "Congratulations", "Now you can play");
+                    MainWindow mainWindow = new MainWindow();
+                    mainWindow.show();
                     this.close();
                 } catch (WeakPasswordException exception){
-                    Alert.errorAlert("Wrong", "Weak password", "The password should contain letters, numbers and symbols");
+                    AlertUtil.errorAlert("Wrong", "Weak password", "The password should contain letters, numbers and symbols");
                 } catch (CouldNotCreateUserException exception){
-                    Alert.errorAlert("Wrong", "Sorry", "An error happened, the user couldn't be create");
+                    AlertUtil.errorAlert("Wrong", "Sorry", "An error happened, the user couldn't be create");
                 } catch (ExistsNicknameException exception){
-                    Alert.errorAlert("Wrong", "This nickname already exists", "");
+                    AlertUtil.errorAlert("Wrong", "This nickname already exists", "");
                 }
             } else {
-                Alert.errorAlert("Wrong", "The passwords aren't equals", "");
+                AlertUtil.errorAlert("Wrong", "The passwords aren't equals", "");
             }
         });
 
         autoGeneratePasswordBtn.setOnAction(e -> {
-            String password = Password.generatePassword();
+            String password = PasswordUtil.generatePassword();
 
             passwordTF.setText(password);
             confirmPasswordTF.setText(password);

@@ -7,8 +7,11 @@
 <?import javafx.scene.layout.*?>
 
 
-<AnchorPane prefHeight="250.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="300.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label fx:id="hiLabel" layoutX="110.0" layoutY="24.0" text="Label" />
+      <Label layoutX="47.0" layoutY="23.0" text="Choose the board dimension" />
+      <Button fx:id="mediumGameBtn" layoutX="104.0" layoutY="150.0" mnemonicParsing="false" text="4 X 5" />
+      <Button fx:id="fastGameBtn" layoutX="103.0" layoutY="87.0" mnemonicParsing="false" text="3 X 4" />
+      <Button fx:id="longGameBtn" layoutX="103.0" layoutY="217.0" mnemonicParsing="false" text="5 X 6" />
    </children>
 </AnchorPane>

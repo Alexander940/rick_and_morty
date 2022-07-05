@@ -13,11 +13,9 @@ public class UserDAO {
 
     public static void createUser(User user) throws CouldNotCreateUserException{
         try(Connection connection = ConnectorDB.get_connection()){
-            System.out.println(connection);
             PreparedStatement ps;
 
             String query = "INSERT INTO `users` (`name`, `lastname`, `nickname`, `email`, `password`, `date_sign_up`) VALUES (?,?,?,?,?,CURRENT_TIMESTAMP)";
-            System.out.println(connection);
             ps = connection.prepareStatement(query);
 
             ps.setString(1, user.getName());
@@ -37,7 +35,6 @@ public class UserDAO {
         try(Connection connection = ConnectorDB.get_connection()){
             PreparedStatement ps;
             ResultSet rs;
-            System.out.println(connection);
 
             String query = "SELECT * FROM users WHERE nickname = ?";
             ps = connection.prepareStatement(query);

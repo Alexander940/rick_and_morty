@@ -4,6 +4,10 @@ import java.util.Random;
 
 public class Board {
 
+    public enum Size{
+        SMALL, MEDIUM, LARGE
+    }
+
     private Box head;
     private Box tail;
     private int dimension;

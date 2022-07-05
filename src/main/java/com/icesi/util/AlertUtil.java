@@ -1,6 +1,11 @@
-package com.icesi.service;
+package com.icesi.util;
 
-public abstract class Alert {
+/**
+ * This class contains utilities for a fxml alert
+ * @author alexanderecheverry
+ * @version 1.0
+ */
+public abstract class AlertUtil {
 
     /**
      * This method shows an alert

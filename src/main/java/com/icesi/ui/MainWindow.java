@@ -57,8 +57,6 @@ public class MainWindow extends Stage {
         signUpBtn.setOnAction(event -> {
             SignUpWindow signUpWindow = new SignUpWindow();
             signUpWindow.show();
-
-            this.close();
         });
 
 

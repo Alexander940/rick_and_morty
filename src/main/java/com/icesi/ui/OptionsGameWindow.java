@@ -1,31 +1,32 @@
 package com.icesi.ui;
 
-import com.icesi.model.Game;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class OptionsGameWindow extends Stage {
 
-    Label hiLabel;
+    Button fastGameBtn, mediumGameBtn, longGameBtn;
 
     public OptionsGameWindow() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/OptionsGameWindow.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/OptionsGameWindow"));
             Parent root = loader.load();
 
-            hiLabel = (Label) loader.getNamespace().get("hiLabel");
+            fastGameBtn = (Button) loader.getNamespace().get("fastGameBtn");
+            mediumGameBtn = (Button) loader.getNamespace().get("mediumGameBtn");
+            longGameBtn = (Button) loader.getNamespace().get("longGameBtn");
 
-            Scene scene = new Scene(root, 250, 250);
+            Scene scene = new Scene(root, 600,400);
             setScene(scene);
 
             init();
-        } catch (IOException exception) {
-
+        } catch (IOException exception){
+            exception.printStackTrace();
         }
     }
 
@@ -33,6 +34,6 @@ public class OptionsGameWindow extends Stage {
      * this method execute the actions of fxml components
      */
     private void init() {
-        hiLabel.setText("Hi " + Game.getInstance().getPrincipalPlayer().getName());
+
     }
 }

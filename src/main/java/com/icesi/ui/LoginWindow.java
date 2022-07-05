@@ -1,12 +1,13 @@
 package com.icesi.ui;
 
+import com.icesi.exceptions.UserNonExistentException;
 import com.icesi.model.Game;
 import com.icesi.model.User;
+import com.icesi.util.AlertUtil;
 import com.icesi.service.UserService;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import com.icesi.service.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -49,17 +50,19 @@ public class LoginWindow extends Stage {
      */
     private void init() {
         loginBtn.setOnAction(event -> {
-            User loginUser = UserService.findUser(nicknameTF.getText());
+            try{
+                User loginUser = UserService.findUser(nicknameTF.getText());
 
-            if(Game.getInstance().getPrincipalPlayer() == null && loginUser.getPassword().equals(passwordPF.getText())){
-                Game.getInstance().setPrincipalPlayer(loginUser);
-                GameWindow gameWindow = new GameWindow();
-                gameWindow.show();
-                this.close();
-            } else if (Game.getInstance().getPrincipalPlayer() != null && Game.getInstance().getSecondPlayer() == null && loginUser.getPassword().equals(passwordPF.getText())){
-                Game.getInstance().setSecondPlayer(loginUser);
-            } else {
-                Alert.errorAlert("Wrong","The both player are login","");
+                if(Game.getInstance().getFirstPlayer() == null && loginUser.getPassword().equals(passwordPF.getText())){
+                    Game.getInstance().setFirstPlayer(loginUser);
+                    GameWindow gameWindow = new GameWindow();
+                    gameWindow.show();
+                    this.close();
+                } else {
+                    AlertUtil.errorAlert("Wrong","The password aren't equals", "");
+                }
+            } catch (UserNonExistentException exception){
+                AlertUtil.errorAlert("Wrong", "The user doesn't exist", "");
             }
         });
     }

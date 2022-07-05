@@ -1,15 +1,14 @@
-package com.icesi.service;
+package com.icesi.util;
 
-import com.icesi.service.Password;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class PasswordTest {
+public class PasswordUtilTest {
 
     @Test
     public void generate_the_password() {
-        String password = Password.generatePassword();
+        String password = PasswordUtil.generatePassword();
 
         assertNotNull(password);
     }

@@ -6,7 +6,7 @@ package com.icesi.model;
  */
 public class Game {
 
-    public static Game instance;
+    private static Game instance;
 
     /**
      * This method is about architecture singleton
@@ -20,7 +20,7 @@ public class Game {
     }
 
     private Board board;
-    private User principalPlayer;
+    private User firstPlayer;
     private User secondPlayer;
 
     public void createBoard(int rows, int columns, int portalNumber, int seedNumber){
@@ -35,12 +35,12 @@ public class Game {
         this.board = board;
     }
 
-    public User getPrincipalPlayer() {
-        return principalPlayer;
+    public User getFirstPlayer() {
+        return firstPlayer;
     }
 
-    public void setPrincipalPlayer(User principalPlayer) {
-        this.principalPlayer = principalPlayer;
+    public void setFirstPlayer(User firstPlayer) {
+        this.firstPlayer = firstPlayer;
     }
 
     public User getSecondPlayer() {

@@ -31,6 +31,8 @@ public class SignUpWindow extends Stage {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/SignUpWindow.fxml"));
             Parent root = loader.load();
 
+            this.setResizable(false);
+
             nameTF = (TextField) loader.getNamespace().get("nameTF");
             lastnameTF = (TextField) loader.getNamespace().get("lastnameTF");
             emailTF = (TextField) loader.getNamespace().get("emailTF");

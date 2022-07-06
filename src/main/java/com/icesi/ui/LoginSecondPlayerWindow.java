@@ -26,6 +26,8 @@ public class LoginSecondPlayerWindow extends Stage {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/LoginSecondPlayerWindow.fxml"));
             Parent root = loader.load();
 
+            this.setResizable(false);
+
             nicknameTf = (TextField) loader.getNamespace().get("nicknameTf");
             passwordPf = (PasswordField) loader.getNamespace().get("passwordPf");
             signUpBtn = (Button) loader.getNamespace().get("signUpBtn");

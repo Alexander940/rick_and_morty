@@ -19,21 +19,27 @@ public class Game {
         return instance;
     }
 
-    private Board board;
+    private final Board board = new Board();
     private User firstPlayer;
     private User secondPlayer;
 
-    public void createBoard(int rows, int columns, int portalNumber, int seedNumber){
-        board = new Board(rows, columns, portalNumber, seedNumber);
+    public void createBoard(Board.Size size){
+        if(size == Board.Size.SMALL){
+            board.createSmallBoard();
+        } else if(size == Board.Size.MEDIUM){
+            board.createMediumBoard();
+        } else {
+            board.createLargeBoard();
+        }
     }
 
     public Board getBoard() {
         return board;
     }
 
-    public void setBoard(Board board) {
+    /*public void setBoard(Board board) {
         this.board = board;
-    }
+    }*/
 
     public User getFirstPlayer() {
         return firstPlayer;

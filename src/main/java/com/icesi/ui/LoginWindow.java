@@ -31,6 +31,8 @@ public class LoginWindow extends Stage {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/LoginWindow.fxml"));
             Parent root = loader.load();
 
+            this.setResizable(false);
+
             nicknameTF = (TextField) loader.getNamespace().get("nicknameTF");
             passwordPF = (PasswordField) loader.getNamespace().get("passwordPF");
             loginBtn = (Button) loader.getNamespace().get("loginBtn");

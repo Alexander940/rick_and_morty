@@ -12,7 +12,7 @@ public class BoardTest {
 
     @Before
     public void setUp() throws Exception {
-        board = new Board(4,5, 0,0);
+        board = new Board();
     }
 
     @Test
@@ -51,14 +51,14 @@ public class BoardTest {
 
     @Test
     public void assign_the_character_to_the_portal() {
-        board = new Board(2, 1, 1,0);
+        board = new Board();
 
         assertEquals('A', board.getHead().getPortalSignature());
     }
 
     @Test
     public void create_a_portal() {
-        board = new Board(2, 1, 1,0);
+        board = new Board();
 
         assertEquals(board.getHead(), board.getTail().getPortal());
     }

@@ -6,7 +6,8 @@
 
 #fondo { -fx-background-color: #660099; }
 
-Button { -fx-background-color: #02CF08;
+Button {
+    -fx-background-color: #02CF08;
     -fx-border-color: #FFFFFF;
     -fx-border-width: 2;
     -fx-text-fill: #FFCC00;

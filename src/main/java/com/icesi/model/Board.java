@@ -15,17 +15,8 @@ public class Board {
     private int columns;
     private int portalNumber;
     private int seedNumber;
-
-    public Board(int rows, int columns, int portalNumber, int seedNumber) {
-        this.rows = rows;
-        this.columns = columns;
-        this.dimension = rows*columns;
-        this.portalNumber = portalNumber;
-        this.seedNumber = seedNumber;
-        fillBoard(1);
-        createPortals(0);
-        createSeeds(0);
-    }
+    private final char RICK_PLAYER = 'R';
+    private final char MORTY_PLAYER = 'M';
 
     /**
      * This method manage the links between boxes
@@ -66,8 +57,8 @@ public class Board {
 
     /**
      * This method creates the link between two boxes
-     * @param current
-     * @param previous
+     * @param current Contains the actual box to linked
+     * @param previous Contains the previous box to linked
      */
     public void createLink(Box current, Box previous){
         current.setPreviousBox(previous);
@@ -106,7 +97,7 @@ public class Board {
     public void createSeeds(int i){
         Box seedBox = getBox(head, generateRandomNumber(), 1);
 
-        if(seedBox.isSeed() == false && i < seedNumber){
+        if(!seedBox.isSeed() && i < seedNumber){
             seedBox.setSeed(true);
             createSeeds(i+1);
         }
@@ -114,10 +105,10 @@ public class Board {
 
     /**
      * This method return a required box
-     * @param current
-     * @param positionBoxSearched
-     * @param i
-     * @return
+     * @param current Contains the actual box in the loop
+     * @param positionBoxSearched Contains the position of the box searched
+     * @param i This is the iterator variable
+     * @return The box searched or null if the box isn't found out
      */
     public Box getBox(Box current ,int positionBoxSearched, int i){
         if(positionBoxSearched == i){
@@ -128,6 +119,51 @@ public class Board {
             current = current.getNextBox();
             return getBox(current, positionBoxSearched, i+1);
         }
+    }
+
+    /**
+     * This method creates a board for a fast game
+     */
+    public void createSmallBoard() {
+        this.rows = 3;
+        this.columns = 4;
+        this.dimension = rows*columns;
+        this.portalNumber = 3;
+        this.seedNumber = 3;
+
+        fillBoard(1);
+        createSeeds(seedNumber);
+        createPortals(portalNumber);
+    }
+
+    /**
+     * This method creates a board for a medium time game
+     */
+    public void createMediumBoard() {
+        this.rows = 4;
+        this.columns = 5;
+        this.dimension = rows*columns;
+        this.portalNumber = 4;
+        this.seedNumber = 4;
+
+        fillBoard(1);
+        createSeeds(seedNumber);
+        createPortals(portalNumber);
+    }
+
+    /**
+     * This method creates a board for a long game
+     */
+    public void createLargeBoard() {
+        this.rows = 5;
+        this.columns = 6;
+        this.dimension = rows*columns;
+        this.portalNumber = 5;
+        this.seedNumber = 5;
+
+        fillBoard(1);
+        createSeeds(seedNumber);
+        createPortals(portalNumber);
     }
 
     public Box getHead() {

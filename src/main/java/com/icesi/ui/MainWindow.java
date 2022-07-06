@@ -24,6 +24,8 @@ public class MainWindow extends Stage {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/MainWindow.fxml"));
             Parent root = loader.load();
 
+            this.setResizable(false);
+
             imageView = (ImageView) loader.getNamespace().get("imageView");
             signUpBtn = (Button) loader.getNamespace().get("signUpBtn");
             logInBtn = (Button) loader.getNamespace().get("logInBtn");
@@ -45,7 +47,7 @@ public class MainWindow extends Stage {
         loadImage(imageView, "src/main/resources/img/image_menu_main.png");
 
         panel.getStylesheets().clear();
-        panel.getStylesheets().add("/styles/style1.css");
+        panel.getStylesheets().add("/styles/MainWindow.css");
 
         logInBtn.setOnAction(event -> {
             LoginWindow loginWindow = new LoginWindow();

@@ -33,6 +33,8 @@ public class GameWindow extends Stage {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/GameWindow.fxml"));
             Parent root = loader.load();
 
+            this.setResizable(false);
+
             imageView = (ImageView) loader.getNamespace().get("imageView");
             startGameBtn = (Button) loader.getNamespace().get("startGameBtn");
             hiLabel = (Label) loader.getNamespace().get("hiLabel");

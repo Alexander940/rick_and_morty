@@ -15,6 +15,8 @@ public class SelectSecondPlayerWindow extends Stage {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/SelectSecondPlayerWindow.fxml"));
             Parent root = loader.load();
 
+            this.setResizable(false);
+
             Scene scene = new Scene(root, 600,400);
             setScene(scene);
 

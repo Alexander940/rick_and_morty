@@ -1,5 +1,7 @@
 package com.icesi.ui;
 
+import com.icesi.model.Board;
+import com.icesi.model.Game;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -16,6 +18,8 @@ public class OptionsGameWindow extends Stage {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/OptionsGameWindow"));
             Parent root = loader.load();
+
+            this.setResizable(false);
 
             fastGameBtn = (Button) loader.getNamespace().get("fastGameBtn");
             mediumGameBtn = (Button) loader.getNamespace().get("mediumGameBtn");
@@ -34,6 +38,16 @@ public class OptionsGameWindow extends Stage {
      * this method execute the actions of fxml components
      */
     private void init() {
+        fastGameBtn.setOnAction(event -> {
+            Game.getInstance().createBoard(Board.Size.SMALL);
+        });
 
+        mediumGameBtn.setOnAction(event -> {
+            Game.getInstance().createBoard(Board.Size.MEDIUM);
+        });
+
+        longGameBtn.setOnAction(event -> {
+            Game.getInstance().createBoard(Board.Size.LARGE);
+        });
     }
 }

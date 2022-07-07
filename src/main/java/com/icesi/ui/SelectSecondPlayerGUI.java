@@ -5,15 +5,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-/**
- * @author alexanderecheverry
- * @version 1.0
- */
-public class BoardWindow extends Stage {
+import java.io.IOException;
 
-    public BoardWindow() {
+public class SelectSecondPlayerGUI extends Stage {
+
+    public SelectSecondPlayerGUI() {
         try{
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/BoardWindow.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/SelectSecondPlayerGUI.fxml"));
             Parent root = loader.load();
 
             this.setResizable(false);
@@ -22,7 +20,7 @@ public class BoardWindow extends Stage {
             setScene(scene);
 
             init();
-        } catch (Exception exception){
+        }catch (IOException exception){
             exception.printStackTrace();
         }
     }

@@ -20,15 +20,15 @@ import java.io.IOException;
  * @version 1.0
  * This class controls the login window
  */
-public class LoginWindow extends Stage {
+public class LoginGUI extends Stage {
 
     TextField nicknameTF;
     PasswordField passwordPF;
     Button loginBtn;
 
-    public LoginWindow() {
+    public LoginGUI() {
         try{
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/LoginWindow.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/LoginGUI.fxml"));
             Parent root = loader.load();
 
             this.setResizable(false);
@@ -52,20 +52,21 @@ public class LoginWindow extends Stage {
      */
     private void init() {
         loginBtn.setOnAction(event -> {
-            try{
+            GameGUI gameWindow = new GameGUI();
+            gameWindow.show();
+            this.close();
+            /*try{
                 User loginUser = UserService.findUser(nicknameTF.getText());
 
                 if(Game.getInstance().getFirstPlayer() == null && loginUser.getPassword().equals(passwordPF.getText())){
                     Game.getInstance().setFirstPlayer(loginUser);
-                    GameWindow gameWindow = new GameWindow();
-                    gameWindow.show();
-                    this.close();
+
                 } else {
                     AlertUtil.errorAlert("Wrong","The password aren't equals", "");
                 }
             } catch (UserNonExistentException exception){
                 AlertUtil.errorAlert("Wrong", "The user doesn't exist", "");
-            }
+            }*/
         });
     }
 }

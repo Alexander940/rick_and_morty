@@ -1,5 +1,6 @@
 package com.icesi.ui;
 
+import com.icesi.util.ImageUtil;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -13,15 +14,15 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-public class MainWindow extends Stage {
+public class MainGUI extends Stage {
 
     ImageView imageView;
     Button signUpBtn, logInBtn;
     AnchorPane panel;
 
-    public MainWindow() {
+    public MainGUI() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/MainWindow.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/MainGUI.fxml"));
             Parent root = loader.load();
 
             this.setResizable(false);
@@ -44,39 +45,23 @@ public class MainWindow extends Stage {
      * this method execute the actions of fxml components
      */
     private void init() {
-        loadImage(imageView, "src/main/resources/img/image_menu_main.png");
+        imageView.setImage(ImageUtil.loadImage("src/main/resources/img/image_menu_main.png"));
 
         panel.getStylesheets().clear();
         panel.getStylesheets().add("/styles/MainWindow.css");
 
         logInBtn.setOnAction(event -> {
-            LoginWindow loginWindow = new LoginWindow();
+            LoginGUI loginWindow = new LoginGUI();
             loginWindow.show();
 
             this.close();
         });
 
         signUpBtn.setOnAction(event -> {
-            SignUpWindow signUpWindow = new SignUpWindow();
+            SignUpGUI signUpWindow = new SignUpGUI();
             signUpWindow.show();
         });
 
 
-    }
-
-    /**
-     * This method load an image into an image view
-     * @param iv This is the image view
-     * @param path This is the path of the image
-     */
-    private void loadImage(ImageView iv, String path){
-        try{
-            File file = new File(path);
-            FileInputStream fileInputStream = new FileInputStream(file);
-            Image image = new Image(fileInputStream);
-            iv.setImage(image);
-        } catch (Exception exception){
-            exception.printStackTrace();
-        }
     }
 }

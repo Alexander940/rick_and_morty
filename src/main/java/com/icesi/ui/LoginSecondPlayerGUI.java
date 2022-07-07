@@ -15,15 +15,15 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class LoginSecondPlayerWindow extends Stage {
+public class LoginSecondPlayerGUI extends Stage {
 
     TextField nicknameTf;
     PasswordField passwordPf;
     Button signUpBtn, logInBtn;
 
-    public LoginSecondPlayerWindow() {
+    public LoginSecondPlayerGUI() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/LoginSecondPlayerWindow.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/LoginSecondPlayerGUI.fxml"));
             Parent root = loader.load();
 
             this.setResizable(false);
@@ -47,23 +47,27 @@ public class LoginSecondPlayerWindow extends Stage {
      */
     private void init() {
         signUpBtn.setOnAction(event -> {
-            SignUpWindow signUpWindow = new SignUpWindow();
+            SignUpGUI signUpWindow = new SignUpGUI();
             signUpWindow.show();
         });
 
         logInBtn.setOnAction(event -> {
-            try {
+            OptionsGameGUI optionsGameGUI = new OptionsGameGUI();
+            optionsGameGUI.show();
+            this.close();
+            /*try {
                 User loginUser = UserService.findUser(nicknameTf.getText());
 
                 if(Game.getInstance().getSecondPlayer() == null && loginUser.getPassword().equals(passwordPf.getText())){
                     Game.getInstance().setSecondPlayer(loginUser);
+
                     this.close();
                 } else {
                     AlertUtil.errorAlert("Wrong","The password aren't equals", "");
                 }
             } catch (UserNonExistentException exception){
                 AlertUtil.errorAlert("Wrong", "The user doesn't exists", "");
-            }
+            }*/
         });
     }
 }

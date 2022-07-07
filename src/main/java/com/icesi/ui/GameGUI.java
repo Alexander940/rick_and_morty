@@ -2,6 +2,7 @@ package com.icesi.ui;
 
 import com.icesi.util.AlertUtil;
 import com.icesi.model.Game;
+import com.icesi.util.ImageUtil;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -21,16 +22,16 @@ import java.io.FileInputStream;
  * @author alexanderecheverry
  * @version 1.0
  */
-public class GameWindow extends Stage {
+public class GameGUI extends Stage {
 
     private ImageView imageView;
     private Button startGameBtn;
     private Label hiLabel;
     private AnchorPane anchorPane;
 
-    public GameWindow() {
+    public GameGUI() {
         try{
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/GameWindow.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/GameGUI.fxml"));
             Parent root = loader.load();
 
             this.setResizable(false);
@@ -53,33 +54,15 @@ public class GameWindow extends Stage {
      * this method execute the actions of fxml components
      */
     private void init() {
-        loadImage(imageView, "src/main/resources/img/image_menu_main.png");
+        imageView.setImage(ImageUtil.loadImage("src/main/resources/img/image_menu_main.png"));
+
         hiLabel.setTextAlignment(TextAlignment.CENTER);
-        hiLabel.setText("Hello, " + Game.getInstance().getFirstPlayer().getName());
+        //hiLabel.setText("Hello, " + Game.getInstance().getFirstPlayer().getName());
 
         startGameBtn.setOnAction(e -> {
-            if(Game.getInstance().getFirstPlayer() != null) {
-                LoginSecondPlayerWindow optionsGameWindow = new LoginSecondPlayerWindow();
-                optionsGameWindow.show();
-            } else {
-                AlertUtil.errorAlert("Wrong", "You should login before to init a game", "");
-            }
+            LoginSecondPlayerGUI optionsGameWindow = new LoginSecondPlayerGUI();
+            optionsGameWindow.show();
+            this.close();
         });
-    }
-
-    /**
-     * This method load an image into an image view
-     * @param iv This is the image view
-     * @param path This is the path of the image
-     */
-    private void loadImage(ImageView iv, String path){
-        try{
-            File file = new File(path);
-            FileInputStream fileInputStream = new FileInputStream(file);
-            Image image = new Image(fileInputStream);
-            iv.setImage(image);
-        } catch (Exception exception){
-            exception.printStackTrace();
-        }
     }
 }

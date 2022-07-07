@@ -21,14 +21,14 @@ import java.io.IOException;
  * @version 1.0
  * This class controls the fxml login window
  */
-public class SignUpWindow extends Stage {
+public class SignUpGUI extends Stage {
 
     private TextField nameTF, lastnameTF, emailTF, nicknameTF, passwordTF, confirmPasswordTF;
     private Button signupBtn, autoGeneratePasswordBtn;
 
-    public SignUpWindow(){
+    public SignUpGUI(){
         try{
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/SignUpWindow.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/SignUpGUI.fxml"));
             Parent root = loader.load();
 
             this.setResizable(false);
@@ -61,7 +61,7 @@ public class SignUpWindow extends Stage {
                     UserService.compareNickname(nicknameTF.getText());
                     UserService.createUser(nameTF.getText(), lastnameTF.getText(), nicknameTF.getText(), emailTF.getText(), passwordTF.getText());
                     AlertUtil.confirmationAlert("Successful operation", "Congratulations", "Now you can play");
-                    MainWindow mainWindow = new MainWindow();
+                    MainGUI mainWindow = new MainGUI();
                     mainWindow.show();
                     this.close();
                 } catch (WeakPasswordException exception){

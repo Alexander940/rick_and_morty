@@ -8,9 +8,20 @@ public class Box {
     private Box portal;
     private char portalSignature;
     private boolean seed;
+    private String content;
 
     public Box(int position) {
         this.position = position;
+        this.content = String.valueOf(position);
+        this.seed = false;
+    }
+
+    /**
+     * This method set the value of the content of box to the box position, this is used
+     * to change the character of the player to the position of the box when the player move on the box
+     */
+    public void setContentToPosition(){
+        content = String.valueOf(position);
     }
 
     public int getPosition() {
@@ -59,5 +70,13 @@ public class Box {
 
     public void setSeed(boolean seed) {
         this.seed = seed;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 }

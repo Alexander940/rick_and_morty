@@ -5,7 +5,7 @@ package com.icesi.util;
  * @author alexanderecheverry
  * @version 1.0
  */
-public abstract class AlertUtil {
+public class AlertUtil {
 
     /**
      * This method shows an alert

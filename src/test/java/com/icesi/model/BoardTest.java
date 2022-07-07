@@ -13,6 +13,10 @@ public class BoardTest {
     @Before
     public void setUp() throws Exception {
         board = new Board();
+        board.setRows(3);
+        board.setColumns(4);
+        board.setDimension(12);
+        board.fillBoard(1);
     }
 
     @Test
@@ -51,15 +55,26 @@ public class BoardTest {
 
     @Test
     public void assign_the_character_to_the_portal() {
-        board = new Board();
-
         assertEquals('A', board.getHead().getPortalSignature());
     }
 
     @Test
     public void create_a_portal() {
-        board = new Board();
-
         assertEquals(board.getHead(), board.getTail().getPortal());
+    }
+
+    @Test
+    public void create_seeds() {
+        board.setSeedNumber(3);
+        board.createSeeds(0);
+
+        int count = 0;
+        for (int i = 1; i < board.getDimension(); i++) {
+            if(board.getBox(board.getHead(), i, 1).isSeed()){
+                count++;
+            }
+        }
+
+        assertEquals(3, count);
     }
 }

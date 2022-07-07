@@ -2,10 +2,19 @@ package com.icesi.model;
 
 import java.util.Random;
 
+/**
+ * This class contains the data and actions of a board
+ * @author alexanderecheverry
+ * @version 1.0
+ */
 public class Board {
 
     public enum Size{
         SMALL, MEDIUM, LARGE
+    }
+
+    public enum Turn{
+        MORTY, RICK
     }
 
     private Box head;
@@ -15,11 +24,15 @@ public class Board {
     private int columns;
     private int portalNumber;
     private int seedNumber;
-    private final char RICK_PLAYER = 'R';
-    private final char MORTY_PLAYER = 'M';
+    private final String RICK_PLAYER = "R";
+    private final String MORTY_PLAYER = "M";
+    private int rickPosition;
+    private int mortyPosition;
 
     /**
      * This method manage the links between boxes
+     * @see com.icesi.model.Board#createLink(Box, Box)
+     * @see com.icesi.model.Board#fillBoard(int)
      * @param previous This is the previous box of the recursion
      * @param i This is the position of the current box
      */
@@ -37,7 +50,7 @@ public class Board {
     }
 
     /**
-     * This method creates the head
+     * This method creates the head of the board
      * @param i This is the position of head
      */
     public void fillBoard(int i){
@@ -66,8 +79,8 @@ public class Board {
     }
 
     /**
-     * This method create the Links to the portals
-     * @param i This is the iterator of the recursion
+     * This method gets a random number, generate a link between two boxes and assign a character id to the portal
+     * @param i This is the iterator variable of the recursion
      */
     public void createPortals(int i){
         Box portalBox1 = getBox(head, generateRandomNumber(), 1);
@@ -94,12 +107,18 @@ public class Board {
         return new Random().nextInt(dimension)+1;
     }
 
+    /**
+     * This method put the seeds in a random box
+     * @param i This is the iterator variable and contains the number of seeds to create
+     */
     public void createSeeds(int i){
         Box seedBox = getBox(head, generateRandomNumber(), 1);
 
         if(!seedBox.isSeed() && i < seedNumber){
             seedBox.setSeed(true);
             createSeeds(i+1);
+        } else if(i < seedNumber){
+            createSeeds(i);
         }
     }
 
@@ -132,8 +151,10 @@ public class Board {
         this.seedNumber = 3;
 
         fillBoard(1);
-        createSeeds(seedNumber);
-        createPortals(portalNumber);
+        createSeeds(0);
+        createPortals(0);
+
+        assignPlayersInitialPosition();
     }
 
     /**
@@ -147,8 +168,10 @@ public class Board {
         this.seedNumber = 4;
 
         fillBoard(1);
-        createSeeds(seedNumber);
-        createPortals(portalNumber);
+        createSeeds(0);
+        createPortals(0);
+
+        assignPlayersInitialPosition();
     }
 
     /**
@@ -162,8 +185,37 @@ public class Board {
         this.seedNumber = 5;
 
         fillBoard(1);
-        createSeeds(seedNumber);
-        createPortals(portalNumber);
+        createSeeds(0);
+        createPortals(0);
+
+        assignPlayersInitialPosition();
+    }
+
+    /**
+     * This method get two random number to assign the initial position of the two players in the board
+     */
+    private void assignPlayersInitialPosition() {
+        Box firstBox;
+        Box secondBox;
+        do {
+            //A random box is chosen to assign the letter of the first player
+            firstBox = getBox(head, generateRandomNumber(), 1);
+            //A random box is chosen to assign the letter of the second player
+            secondBox = getBox(head, generateRandomNumber(), 1);
+        }while (firstBox.isSeed() || secondBox.isSeed());
+
+        firstBox.setContent(RICK_PLAYER);
+        secondBox.setContent(MORTY_PLAYER);
+        rickPosition = firstBox.getPosition();
+        mortyPosition = secondBox.getPosition();
+    }
+
+    /**
+     * This class simulates when someone rolls a dice and returns its value
+     * @return An integer between 1 and 6
+     */
+    public int rollDice(){
+        return new Random().nextInt(6)+1;
     }
 
     public Box getHead() {
@@ -204,5 +256,13 @@ public class Board {
 
     public void setColumns(int columns) {
         this.columns = columns;
+    }
+
+    public int getSeedNumber() {
+        return seedNumber;
+    }
+
+    public void setSeedNumber(int seedNumber) {
+        this.seedNumber = seedNumber;
     }
 }

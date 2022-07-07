@@ -1,6 +1,6 @@
 package com.icesi.main;
 
-import com.icesi.ui.MainWindow;
+import com.icesi.ui.MainGUI;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -16,7 +16,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        MainWindow mainWindow = new MainWindow();
+        MainGUI mainWindow = new MainGUI();
         mainWindow.show();
     }
 }

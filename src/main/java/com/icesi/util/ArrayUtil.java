@@ -3,7 +3,7 @@ package com.icesi.util;
 /**
  * This class contains utilities for an array
  */
-public abstract class ArrayUtil {
+public class ArrayUtil {
 
     /**
      * This class assess if an array contains any value

@@ -7,13 +7,9 @@ import org.apache.commons.lang3.RandomStringUtils;
  * @version 1.0
  * This class contains utilities for password
  */
-public abstract class PasswordUtil {
+public class PasswordUtil {
 
     private final String CHARACTERS = "+*/?-_´´}{][''$%<>";
-
-    public enum SecurityLevel{
-        WEAK, MEDIUM, STRONG
-    }
 
     /**
      * This method verify if a password is strong

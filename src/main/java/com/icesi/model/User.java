@@ -1,5 +1,10 @@
 package com.icesi.model;
 
+/**
+ * This class contains the data and the actions of a user
+ * @author alexanderecheverry
+ * @version 1.0
+ */
 public class User {
 
     private int id;
@@ -9,6 +14,9 @@ public class User {
     private String email;
     private String password;
     private String date_sing_up;
+    private String characterGame;
+    private int points;
+    private int seedsGotten;
 
     public User(int id, String name, String lastname, String nickname, String email, String password) {
         this.id = id;
@@ -83,6 +91,30 @@ public class User {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getCharacterGame() {
+        return characterGame;
+    }
+
+    public void setCharacterGame(String characterGame) {
+        this.characterGame = characterGame;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
+    }
+
+    public int getSeedsGotten() {
+        return seedsGotten;
+    }
+
+    public void setSeedsGotten(int seedsGotten) {
+        this.seedsGotten = seedsGotten;
     }
 
     @Override

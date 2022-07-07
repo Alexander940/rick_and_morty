@@ -10,13 +10,13 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class OptionsGameWindow extends Stage {
+public class OptionsGameGUI extends Stage {
 
     Button fastGameBtn, mediumGameBtn, longGameBtn;
 
-    public OptionsGameWindow() {
+    public OptionsGameGUI() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/OptionsGameWindow"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/OptionsGameGUI.fxml"));
             Parent root = loader.load();
 
             this.setResizable(false);
@@ -39,15 +39,19 @@ public class OptionsGameWindow extends Stage {
      */
     private void init() {
         fastGameBtn.setOnAction(event -> {
-            Game.getInstance().createBoard(Board.Size.SMALL);
+
+            SmallBoardGUI smallBoardGUI = new SmallBoardGUI();
+            Game.getInstance().createBoard(Board.Size.SMALL, smallBoardGUI);
+            smallBoardGUI.show();
+            this.close();
         });
 
         mediumGameBtn.setOnAction(event -> {
-            Game.getInstance().createBoard(Board.Size.MEDIUM);
+            //Game.getInstance().createBoard(Board.Size.MEDIUM, smallBoardGUI);
         });
 
         longGameBtn.setOnAction(event -> {
-            Game.getInstance().createBoard(Board.Size.LARGE);
+            //Game.getInstance().createBoard(Board.Size.LARGE, smallBoardGUI);
         });
     }
 }

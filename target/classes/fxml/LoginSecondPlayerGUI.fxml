@@ -11,7 +11,7 @@
       <Label fx:id="hiLabel" layoutX="43.0" layoutY="44.0" text="Choose the second player" />
       <Label layoutX="91.0" layoutY="72.0" text="Nickname" />
       <TextField fx:id="nicknameTf" layoutX="45.0" layoutY="98.0" />
-      <PasswordField fx:id="paswwordPf" layoutX="46.0" layoutY="159.0" />
+      <PasswordField fx:id="passwordPf" layoutX="46.0" layoutY="159.0" />
       <Label layoutX="93.0" layoutY="137.0" text="Password" />
       <Button fx:id="signUpBtn" layoutX="14.0" layoutY="8.0" mnemonicParsing="false" text="Sign-up" />
       <Button fx:id="logInBtn" layoutX="92.0" layoutY="200.0" mnemonicParsing="false" text="Log-in" />

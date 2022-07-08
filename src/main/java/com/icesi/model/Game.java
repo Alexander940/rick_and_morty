@@ -1,7 +1,6 @@
 package com.icesi.model;
 
 import com.icesi.ui.BoardGUI;
-import com.icesi.ui.SmallBoardGUI;
 
 /**
  * This class contains the actions of a game
@@ -39,17 +38,21 @@ public class Game {
     /**
      * This method assign the size of the board, and it stars the game
      * @param size This contains the size of the board between SMALL, MEDIUM OR LARGE
-     * @param smallBoardGUI
+     * @param boardGUI This is the GUI board to apply changes
      */
-    public void createBoard(Board.Size size, SmallBoardGUI smallBoardGUI){
+    public void createBoard(Board.Size size, BoardGUI boardGUI){
         if(size == Board.Size.SMALL){
             board.createSmallBoard();
-            chronometer = new Chronometer(true, smallBoardGUI);
-            play(smallBoardGUI);
+            chronometer = new Chronometer(true, boardGUI);
+            play(boardGUI);
         } else if(size == Board.Size.MEDIUM){
             board.createMediumBoard();
+            chronometer = new Chronometer(true, boardGUI);
+            play(boardGUI);
         } else {
             board.createLargeBoard();
+            chronometer = new Chronometer(true, boardGUI);
+            play(boardGUI);
         }
     }
 
@@ -74,7 +77,7 @@ public class Game {
      * @param turn This contains who is turns
      * @param resultDice This contains the result of the dice
      * @param boardGUI This contains the board to apply changes
-     * @param side
+     * @param side This is the side which player will move
      */
     public void movePlayer(Turn turn, int resultDice, BoardGUI boardGUI, SideToMove side){
         if(turn == Turn.RICK){
@@ -104,7 +107,7 @@ public class Game {
      * @param boardGUI This contains the board to apply changes
      * @param position This contains the position where the player is
      * @param side This is the side which player will move
-     * @return
+     * @return true if the box where the player will move to contain a seed, false if the box doesn't contain a seed
      */
     private boolean updatePositions(Turn turn, int resultDice, BoardGUI boardGUI, int position, SideToMove side){
         boolean isSeed = board.movePlayer(turn, resultDice, side);

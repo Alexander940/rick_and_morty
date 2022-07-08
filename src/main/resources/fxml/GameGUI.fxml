@@ -14,7 +14,7 @@
       <Button layoutX="66.0" layoutY="159.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="121.0" text="See scoreboard" AnchorPane.rightAnchor="63.0" />
       <FlowPane alignment="CENTER" columnHalignment="CENTER" layoutX="39.0" layoutY="27.0" prefHeight="33.0" prefWidth="176.0">
          <children>
-            <Label fx:id="hiLabel" prefHeight="19.0" prefWidth="35.0" text="Label" textAlignment="CENTER" />
+            <Label fx:id="hiLabel" prefHeight="19.0" prefWidth="144.0" text="Label" textAlignment="CENTER" />
          </children>
       </FlowPane>
    </children>

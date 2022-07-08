@@ -13,17 +13,17 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class SmallBoardGUI extends Stage implements BoardGUI {
+public class MediumBoardGUI extends Stage implements BoardGUI{
 
     private final Image SEED = ImageUtil.loadImage("src/main/resources/img/seed.jpg");
-    private final Label[] labels = new Label[12];
+    private final Label[] labels = new Label[20];
     private Label timeLabel, nameTurnLabel, resultDiceLabel;
     private Button rollDiceBtn, moveForwardBtn, moveBackBtn;
     private String nameTurn;
 
-    public SmallBoardGUI() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/SmallBoardGUI.fxml"));
+    public MediumBoardGUI() {
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/MediumBoardGUI.fxml"));
             Parent root = loader.load();
 
             labels[0] = (Label) loader.getNamespace().get("label1");
@@ -38,21 +38,29 @@ public class SmallBoardGUI extends Stage implements BoardGUI {
             labels[9] = (Label) loader.getNamespace().get("label10");
             labels[10] = (Label) loader.getNamespace().get("label11");
             labels[11] = (Label) loader.getNamespace().get("label12");
+            labels[12] = (Label) loader.getNamespace().get("label13");
+            labels[13] = (Label) loader.getNamespace().get("label14");
+            labels[14] = (Label) loader.getNamespace().get("label15");
+            labels[15] = (Label) loader.getNamespace().get("label16");
+            labels[16] = (Label) loader.getNamespace().get("label17");
+            labels[17] = (Label) loader.getNamespace().get("label18");
+            labels[18] = (Label) loader.getNamespace().get("label19");
+            labels[19] = (Label) loader.getNamespace().get("label20");
             timeLabel = (Label) loader.getNamespace().get("timeLabel");
             nameTurnLabel = (Label) loader.getNamespace().get("nameTurnLabel");
             resultDiceLabel = (Label) loader.getNamespace().get("resultDiceLabel");
             rollDiceBtn = (Button) loader.getNamespace().get("rollDiceBtn");
-            moveForwardBtn = (Button) loader.getNamespace().get("moveAlongBtn");
+            moveForwardBtn = (Button) loader.getNamespace().get("moveForwardBtn");
             moveBackBtn = (Button) loader.getNamespace().get("moveBackBtn");
 
             this.setResizable(false);
 
-            Scene scene = new Scene(root, 500,200);
+            Scene scene = new Scene(root, 600, 300);
             setScene(scene);
 
             init();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException exception){
+            exception.printStackTrace();
         }
     }
 

@@ -52,22 +52,20 @@ public class LoginSecondPlayerGUI extends Stage {
         });
 
         logInBtn.setOnAction(event -> {
-            OptionsGameGUI optionsGameGUI = new OptionsGameGUI();
-            optionsGameGUI.show();
-            this.close();
-            /*try {
+            try {
                 User loginUser = UserService.findUser(nicknameTf.getText());
 
                 if(Game.getInstance().getSecondPlayer() == null && loginUser.getPassword().equals(passwordPf.getText())){
                     Game.getInstance().setSecondPlayer(loginUser);
-
+                    OptionsGameGUI optionsGameGUI = new OptionsGameGUI();
+                    optionsGameGUI.show();
                     this.close();
                 } else {
                     AlertUtil.errorAlert("Wrong","The password aren't equals", "");
                 }
             } catch (UserNonExistentException exception){
                 AlertUtil.errorAlert("Wrong", "The user doesn't exists", "");
-            }*/
+            }
         });
     }
 }

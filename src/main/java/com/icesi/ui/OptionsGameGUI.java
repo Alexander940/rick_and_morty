@@ -39,7 +39,6 @@ public class OptionsGameGUI extends Stage {
      */
     private void init() {
         fastGameBtn.setOnAction(event -> {
-
             SmallBoardGUI smallBoardGUI = new SmallBoardGUI();
             Game.getInstance().createBoard(Board.Size.SMALL, smallBoardGUI);
             smallBoardGUI.show();
@@ -47,11 +46,17 @@ public class OptionsGameGUI extends Stage {
         });
 
         mediumGameBtn.setOnAction(event -> {
-            //Game.getInstance().createBoard(Board.Size.MEDIUM, smallBoardGUI);
+            MediumBoardGUI mediumBoardGUI = new MediumBoardGUI();
+            Game.getInstance().createBoard(Board.Size.MEDIUM, mediumBoardGUI);
+            mediumBoardGUI.show();
+            this.close();
         });
 
         longGameBtn.setOnAction(event -> {
-            //Game.getInstance().createBoard(Board.Size.LARGE, smallBoardGUI);
+            LargeBoardGUI largeBoardGUI = new LargeBoardGUI();
+            Game.getInstance().createBoard(Board.Size.LARGE, largeBoardGUI);
+            largeBoardGUI.show();
+            this.close();
         });
     }
 }

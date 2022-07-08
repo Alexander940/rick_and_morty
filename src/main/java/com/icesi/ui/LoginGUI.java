@@ -52,21 +52,20 @@ public class LoginGUI extends Stage {
      */
     private void init() {
         loginBtn.setOnAction(event -> {
-            GameGUI gameWindow = new GameGUI();
-            gameWindow.show();
-            this.close();
-            /*try{
+            try{
                 User loginUser = UserService.findUser(nicknameTF.getText());
 
                 if(Game.getInstance().getFirstPlayer() == null && loginUser.getPassword().equals(passwordPF.getText())){
                     Game.getInstance().setFirstPlayer(loginUser);
-
+                    GameGUI gameWindow = new GameGUI();
+                    gameWindow.show();
+                    this.close();
                 } else {
                     AlertUtil.errorAlert("Wrong","The password aren't equals", "");
                 }
             } catch (UserNonExistentException exception){
                 AlertUtil.errorAlert("Wrong", "The user doesn't exist", "");
-            }*/
+            }
         });
     }
 }

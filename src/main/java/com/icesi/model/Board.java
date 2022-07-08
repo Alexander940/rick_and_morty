@@ -26,17 +26,28 @@ public class Board {
     private int mortyPosition;
 
     /**
+     * This method fill the board, it calls the methods to create the box linked list, the seeds and the portals
+     */
+    public void fillBoard(){
+        createLinkedList(1);
+        createSeeds(0);
+        createPortals(0);
+
+        assignPlayersInitialPosition();
+    }
+
+    /**
      * This method manage the links between boxes
      * @see com.icesi.model.Board#createLink(Box, Box)
-     * @see com.icesi.model.Board#fillBoard(int)
+     * @see com.icesi.model.Board#createLinkedList(int)
      * @param previous This is the previous box of the recursion
      * @param i This is the position of the current box
      */
-    public void fillBoard(Box previous, int i){
-        Box current = createBox(i);
+    private void createLinkedList(Box previous, int i){
+        Box current = new Box(i);
         if(i < dimension){
             createLink(current, previous);
-            fillBoard(current, i+1);
+            createLinkedList(current, i+1);
         } else {
             tail = current;
             createLink(tail, previous);
@@ -49,19 +60,11 @@ public class Board {
      * This method creates the head of the board
      * @param i This is the position of head
      */
-    public void fillBoard(int i){
+    private void createLinkedList(int i){
         if(i == 1){
-            head = createBox(1);
-            fillBoard(head, i+1);
+            head = new Box(1);
+            createLinkedList(head, i+1);
         }
-    }
-
-    /**
-     * This method creates a box
-     * @param pos This is the box position
-     */
-    public Box createBox(int pos){
-        return new Box(pos);
     }
 
     /**
@@ -155,7 +158,7 @@ public class Board {
         this.portalNumber = 3;
         this.seedNumber = 3;
 
-        fillBoard(1);
+        createLinkedList(1);
         createSeeds(0);
         createPortals(0);
 
@@ -172,7 +175,7 @@ public class Board {
         this.portalNumber = 4;
         this.seedNumber = 4;
 
-        fillBoard(1);
+        createLinkedList(1);
         createSeeds(0);
         createPortals(0);
 
@@ -189,7 +192,7 @@ public class Board {
         this.portalNumber = 5;
         this.seedNumber = 5;
 
-        fillBoard(1);
+        createLinkedList(1);
         createSeeds(0);
         createPortals(0);
 

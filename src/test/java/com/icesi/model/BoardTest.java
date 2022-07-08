@@ -2,7 +2,6 @@ package com.icesi.model;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
 
 import static org.junit.Assert.*;
 
@@ -16,7 +15,7 @@ public class BoardTest {
         board.setRows(3);
         board.setColumns(4);
         board.setDimension(12);
-        board.fillBoard(1);
+        board.fillBoard();
     }
 
     @Test
@@ -31,8 +30,8 @@ public class BoardTest {
 
     @Test
     public void when_it_creates_a_link() {
-        Box box1 = board.createBox(1);
-        Box box2 = board.createBox(2);
+        Box box1 = new Box(1);
+        Box box2 = new Box(2);
 
         board.createLink(box1, box2);
 

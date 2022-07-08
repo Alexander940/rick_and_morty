@@ -1,6 +1,7 @@
 package com.icesi.model;
 
 import com.icesi.ui.BoardGUI;
+import com.icesi.ui.LastGUI;
 
 /**
  * This class contains the actions of a game
@@ -87,7 +88,7 @@ public class Game {
 
             //Updating the box where the player will go
             position = board.getRickPosition();
-            assessSeedState(isSeed, boardGUI, position);
+            assessSeedState(isSeed, boardGUI, position, turn);
         } else {
             //Updating the box where the player was
             int position = board.getMortyPosition();
@@ -95,7 +96,15 @@ public class Game {
 
             //Updating the box where the player will go
             position = board.getMortyPosition();
-            assessSeedState(isSeed, boardGUI, position);
+            assessSeedState(isSeed, boardGUI, position, turn);
+        }
+
+        if(board.getSeedNumber() == 0){
+            chronometer.setFlag(false);
+            assessWinner();
+            LastGUI lastGUI = new LastGUI();
+            lastGUI.show();
+
         }
     }
 
@@ -124,13 +133,33 @@ public class Game {
      * @param isSeed This contains a boolean value, if it's true, it contains a seed and if it's false, it doesn't contain a seed
      * @param boardGUI This contains the board to apply changes
      * @param position This contains the position of the label to set content
+     * @param turn
      */
-    private void assessSeedState(boolean isSeed, BoardGUI boardGUI, int position){
+    private void assessSeedState(boolean isSeed, BoardGUI boardGUI, int position, Turn turn){
         String character = board.getBox(position).getContent();
         if(isSeed){
+            giveSeed(turn);
             boardGUI.removeImageLabel(character, position);
         } else {
             boardGUI.updateBoardLabel(character, position);
+        }
+    }
+
+    private void giveSeed(Turn turn){
+        if(turn == Turn.RICK){
+            firstPlayer.addSeed();
+        } else {
+            secondPlayer.addSeed();
+        }
+    }
+
+    private void assessWinner(){
+        if(firstPlayer.getSeedsGotten() > secondPlayer.getSeedsGotten()){
+            firstPlayer.setWinner(true);
+            firstPlayer.setPoints((firstPlayer.getSeedsGotten()*120)-chronometer.getSeconds());
+        } else {
+            secondPlayer.setWinner(true);
+            secondPlayer.setPoints((secondPlayer.getSeedsGotten()*120)-chronometer.getSeconds());
         }
     }
 

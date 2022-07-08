@@ -260,6 +260,7 @@ public class Board {
     private boolean changeSeedState(Box box){
         if(box.isSeed()){
             box.setSeed(false);
+            seedNumber--;
             return true;
         }
 
@@ -358,5 +359,9 @@ public class Board {
 
     public int getMortyPosition() {
         return mortyPosition;
+    }
+
+    public int getSeedNumber() {
+        return seedNumber;
     }
 }

@@ -14,9 +14,9 @@ public class User {
     private String email;
     private String password;
     private String date_sing_up;
-    private String characterGame;
     private int points;
     private int seedsGotten;
+    private boolean winner;
 
     public User(int id, String name, String lastname, String nickname, String email, String password) {
         this.id = id;
@@ -25,6 +25,7 @@ public class User {
         this.nickname = nickname;
         this.email = email;
         this.password = password;
+        winner = false;
     }
 
     public User(String name, String lastname, String nickname, String email, String password) {
@@ -33,9 +34,12 @@ public class User {
         this.nickname = nickname;
         this.email = email;
         this.password = password;
+        winner = false;
     }
 
-    public User(){}
+    public User(){
+        winner = false;
+    }
 
     public String getName() {
         return name;
@@ -93,14 +97,6 @@ public class User {
         this.id = id;
     }
 
-    public String getCharacterGame() {
-        return characterGame;
-    }
-
-    public void setCharacterGame(String characterGame) {
-        this.characterGame = characterGame;
-    }
-
     public int getPoints() {
         return points;
     }
@@ -115,6 +111,18 @@ public class User {
 
     public void setSeedsGotten(int seedsGotten) {
         this.seedsGotten = seedsGotten;
+    }
+
+    public void addSeed(){
+        seedsGotten++;
+    }
+
+    public boolean isWinner() {
+        return winner;
+    }
+
+    public void setWinner(boolean winner) {
+        this.winner = winner;
     }
 
     @Override

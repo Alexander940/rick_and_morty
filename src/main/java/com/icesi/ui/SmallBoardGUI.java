@@ -1,8 +1,8 @@
 package com.icesi.ui;
 
+import com.icesi.model.Board;
 import com.icesi.model.Game;
 import com.icesi.util.ImageUtil;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -22,6 +22,7 @@ public class SmallBoardGUI extends Stage implements BoardGUI {
     private Label[] labels = new Label[12];
     private Label timeLabel, nameTurnLabel, resultDiceLabel;
     private Button rollDiceBtn, moveAlongBtn, moveBackBtn;
+    private String nameTurn;
 
     public SmallBoardGUI() {
         try {
@@ -63,7 +64,8 @@ public class SmallBoardGUI extends Stage implements BoardGUI {
      * this method execute the actions of fxml components
      */
     private void init() {
-        nameTurnLabel.setText("Rick (" + " " + ") turns");
+        nameTurn = "Rick";
+        nameTurnLabel.setText(nameTurn + " (" + " " + ") turns");
 
         rollDiceBtn.setOnAction(event -> {
             int resultDice = Game.getInstance().getBoard().rollDice();
@@ -80,11 +82,25 @@ public class SmallBoardGUI extends Stage implements BoardGUI {
         });
 
         moveAlongBtn.setOnAction(event -> {
-
+            if(nameTurn.equalsIgnoreCase("Rick")){
+                Game.getInstance().movePlayer(Game.Turn.RICK, Integer.parseInt(resultDiceLabel.getText()), this, Game.SideToMove.FORWARD);
+                nameTurn = "Morty";
+            } else {
+                Game.getInstance().movePlayer(Game.Turn.MORTY, Integer.parseInt(resultDiceLabel.getText()), this, Game.SideToMove.FORWARD);
+                nameTurn = "Rick";
+            }
+            rollDiceState();
         });
 
         moveBackBtn.setOnAction(event -> {
-
+            if(nameTurn.equalsIgnoreCase("Rick")){
+                Game.getInstance().movePlayer(Game.Turn.RICK, Integer.parseInt(resultDiceLabel.getText()), this, Game.SideToMove.BACK);
+                nameTurn = "Morty";
+            } else {
+                Game.getInstance().movePlayer(Game.Turn.MORTY, Integer.parseInt(resultDiceLabel.getText()), this, Game.SideToMove.BACK);
+                nameTurn = "Rick";
+            }
+            rollDiceState();
         });
     }
 
@@ -102,7 +118,7 @@ public class SmallBoardGUI extends Stage implements BoardGUI {
             if(seconds < 10){
                 timeLabel.setText(minutes + " : " + "0" + seconds);
             } else {
-                timeLabel.setText(minutes + " : " + minutes);
+                timeLabel.setText(minutes + " : " + seconds);
             }
         }
     }
@@ -113,8 +129,26 @@ public class SmallBoardGUI extends Stage implements BoardGUI {
     }
 
     @Override
-    public void updateBoardLabel(int position) {
+    public void addImageLabel(int position) {
         labels[position-1].setText("");
         labels[position-1].setGraphic(new ImageView(SEED));
+    }
+
+    @Override
+    public void removeImageLabel(String character, int position) {
+        labels[position-1].setGraphic(null);
+        updateBoardLabel(character,position);
+    }
+
+    /**
+     * This method change the visible of move buttons and labels to false, and change the
+     * visible of roll dice button and label visible to true
+     */
+    private void rollDiceState(){
+        moveAlongBtn.setVisible(false);
+        moveBackBtn.setVisible(false);
+        rollDiceBtn.setVisible(true);
+        nameTurnLabel.setVisible(true);
+        nameTurnLabel.setText(nameTurn + " (" + " " + ") turns");
     }
 }

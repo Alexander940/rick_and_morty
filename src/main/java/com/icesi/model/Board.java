@@ -13,10 +13,6 @@ public class Board {
         SMALL, MEDIUM, LARGE
     }
 
-    public enum Turn{
-        MORTY, RICK
-    }
-
     private Box head;
     private Box tail;
     private int dimension;
@@ -123,21 +119,30 @@ public class Board {
     }
 
     /**
-     * This method return a required box
+     * This method searched a required box
+     * @see com.icesi.model.Board#getBox(int)
      * @param current Contains the actual box in the loop
      * @param positionBoxSearched Contains the position of the box searched
      * @param i This is the iterator variable
      * @return The box searched or null if the box isn't found out
      */
-    public Box getBox(Box current ,int positionBoxSearched, int i){
+    private Box getBox(Box current ,int positionBoxSearched, int i){
         if(positionBoxSearched == i){
             return current;
-        } else if(i == dimension){
-            return null;
         } else {
             current = current.getNextBox();
             return getBox(current, positionBoxSearched, i+1);
         }
+    }
+
+    /**
+     * This method return a required box
+     * @see com.icesi.model.Board#getBox(Box current, int positionBoxSearched, int i)
+     * @param positionBoxSearched
+     * @return
+     */
+    public Box getBox(int positionBoxSearched){
+        return getBox(head, positionBoxSearched, 1);
     }
 
     /**
@@ -218,20 +223,110 @@ public class Board {
         return new Random().nextInt(6)+1;
     }
 
+    /**
+     * This class change the player position and change the content of the box where the players will be
+     * @param turn This contains player turns to move
+     * @param resultDice This is the result of the dice
+     * @param side This is the side which player will move
+     * @return true if the box where the player will move to have a seed or false if the box doesn't contain a seed
+     */
+    public boolean movePlayer(Game.Turn turn, int resultDice, Game.SideToMove side){
+        Box current;
+        Box next;
+        if(turn == Game.Turn.RICK){
+            next = assignNextBox(rickPosition, side, resultDice);
+            current = getBox(rickPosition);
+            current.setContentToPosition(MORTY_PLAYER);
+            next.setContent(RICK_PLAYER);
+            rickPosition = assignNewPosition(rickPosition,resultDice,side);
+        } else {
+            next = assignNextBox(mortyPosition, side, resultDice);
+            current = getBox(mortyPosition);
+            current.setContentToPosition(RICK_PLAYER);
+            next.setContent(MORTY_PLAYER);
+            mortyPosition = assignNewPosition(mortyPosition, resultDice, side);
+        }
+        return changeSeedState(next);
+    }
+
+    /**
+     * This class assess if a box contains one seed, and change the box seed state to false if the box contains it
+     * @param box This contains the box to assess
+     * @return true if the box was containing one seed or false if wasn't containing any seed
+     */
+    private boolean changeSeedState(Box box){
+        if(box.isSeed()){
+            box.setSeed(false);
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * This method assigns the next box, it depends on the side to move
+     * @param current This contains the current player position
+     * @param side This contains the side where the player must move
+     * @param resultDice This contains the result of the dice
+     * @return The box where the player will move
+     */
+    private Box assignNextBox(int current, Game.SideToMove side, int resultDice){
+        if(side == Game.SideToMove.FORWARD){
+            return getBox(current+resultDice);
+        } else {
+            return getBox(current-resultDice);
+        }
+    }
+
+    /**
+     * This method assigns the new player position, it depends on the side to move
+     * @param current This contains the current player position
+     * @param resultDice This contains the result of the dice
+     * @param side This contains the side where the player must move
+     * @return The new player position
+     */
+    private int assignNewPosition(int current, int resultDice, Game.SideToMove side){
+        if(side == Game.SideToMove.FORWARD){
+            return movePositionToForward(current, resultDice);
+        } else {
+            return movePositionToBack(current, resultDice);
+        }
+    }
+
+    /**
+     * This method change the player position ahead
+     * @param current This contains the current player position
+     * @param resultDice This contains the result of the dice
+     * @return The new player position
+     */
+    private int movePositionToForward(int current, int resultDice){
+        if(current + resultDice > dimension){
+            return current += (resultDice-dimension);
+        } else {
+            return current += resultDice;
+        }
+    }
+
+    /**
+     * This method change the player position to back
+     * @param current This contains the current player position
+     * @param resultDice This contains the result of the dice
+     * @return The new player position
+     */
+    private int movePositionToBack(int current, int resultDice){
+        if(current - resultDice < 1){
+            return current -= (resultDice+dimension);
+        } else {
+            return current -= resultDice;
+        }
+    }
+
     public Box getHead() {
         return head;
     }
 
-    public void setHead(Box head) {
-        this.head = head;
-    }
-
     public Box getTail() {
         return tail;
-    }
-
-    public void setTail(Box tail) {
-        this.tail = tail;
     }
 
     public int getDimension() {
@@ -242,27 +337,23 @@ public class Board {
         this.dimension = dimension;
     }
 
-    public int getRows() {
-        return rows;
-    }
-
     public void setRows(int rows) {
         this.rows = rows;
-    }
-
-    public int getColumns() {
-        return columns;
     }
 
     public void setColumns(int columns) {
         this.columns = columns;
     }
 
-    public int getSeedNumber() {
-        return seedNumber;
-    }
-
     public void setSeedNumber(int seedNumber) {
         this.seedNumber = seedNumber;
+    }
+
+    public int getRickPosition() {
+        return rickPosition;
+    }
+
+    public int getMortyPosition() {
+        return mortyPosition;
     }
 }

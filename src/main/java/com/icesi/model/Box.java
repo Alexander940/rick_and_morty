@@ -20,8 +20,12 @@ public class Box {
      * This method set the value of the content of box to the box position, this is used
      * to change the character of the player to the position of the box when the player move on the box
      */
-    public void setContentToPosition(){
-        content = String.valueOf(position);
+    public void setContentToPosition(String character) {
+        if ((content.equals("M-R") || content.equals("R-M"))) {
+            content = character;
+        } else {
+            content = String.valueOf(position);
+        }
     }
 
     public int getPosition() {
@@ -77,6 +81,10 @@ public class Box {
     }
 
     public void setContent(String content) {
-        this.content = content;
+        if(this.content.equals("R") || this.content.equals("M")){
+            this.content = this.content + "-" + content;
+        } else {
+            this.content = content;
+        }
     }
 }

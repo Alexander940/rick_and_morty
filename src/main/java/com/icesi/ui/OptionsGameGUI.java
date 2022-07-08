@@ -25,7 +25,7 @@ public class OptionsGameGUI extends Stage {
             mediumGameBtn = (Button) loader.getNamespace().get("mediumGameBtn");
             longGameBtn = (Button) loader.getNamespace().get("longGameBtn");
 
-            Scene scene = new Scene(root, 600,400);
+            Scene scene = new Scene(root, 250,300);
             setScene(scene);
 
             init();

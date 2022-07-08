@@ -55,8 +55,7 @@ public class GameGUI extends Stage {
      */
     private void init() {
         imageView.setImage(ImageUtil.loadImage("src/main/resources/img/image_menu_main.png"));
-
-        hiLabel.setTextAlignment(TextAlignment.CENTER);
+        
         //hiLabel.setText("Hello, " + Game.getInstance().getFirstPlayer().getName());
 
         startGameBtn.setOnAction(e -> {

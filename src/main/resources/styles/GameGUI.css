@@ -1,0 +1,33 @@
+Label {
+    -fx-font-family: "Comic Sans MS";
+    -fx-text-alignment: "center";
+    -fx-text-fill: #FFFFFF;
+}
+
+Button {
+    -fx-background-color: #02CF08;
+    -fx-border-color: #FFFFFF;
+    -fx-border-width: 2;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: "Comic Sans MS";
+    -fx-font-style: italic;
+    -fx-font-size: 13px;
+    -fx-background-radius: 10 10 10 10;
+    -fx-border-radius: 10 10 10 10;
+}
+
+Button:hover { -fx-background-color: #333333;
+    -fx-font-size: 11px;
+}
+
+Button:pressed {
+    -fx-background-color: #FFFFFF;
+    -fx-text-fill: #000000;
+    -fx-font-weight: bold;
+}
+
+FlowPane {
+    -fx-background-color: #55968f;
+    -fx-border-radius: 20 20 20 20;
+    -fx-background-radius: 20 20 20 20;
+}

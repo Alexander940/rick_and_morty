@@ -10,6 +10,14 @@ import com.icesi.ui.SmallBoardGUI;
  */
 public class Game {
 
+    public enum SideToMove{
+        FORWARD, BACK
+    }
+
+    public enum Turn{
+        MORTY, RICK
+    }
+
     private static Game instance;
 
     /**
@@ -45,27 +53,82 @@ public class Game {
         }
     }
 
-    public void play(BoardGUI boardGUI){
+    /**
+     * This method starts the chronometer, and it assigns the value of each box to its respective label
+     * @param boardGUI This contains the board to apply changes
+     */
+    private void play(BoardGUI boardGUI){
         chronometer.start();
         for (int i = 0; i < board.getDimension(); i++) {
-            Box box = board.getBox(board.getHead(),i+1,1);
+            Box box = board.getBox(i+1);
             if(box.isSeed()){
-                boardGUI.updateBoardLabel(box.getPosition());
+                boardGUI.addImageLabel(box.getPosition());
             } else {
                 boardGUI.updateBoardLabel(box.getContent(), box.getPosition());
             }
         }
+    }
 
-        boolean flag = true;
-        Board.Turn turn = Board.Turn.MORTY;
+    /**
+     * This method manage the movement of a player
+     * @param turn This contains who is turns
+     * @param resultDice This contains the result of the dice
+     * @param boardGUI This contains the board to apply changes
+     * @param side
+     */
+    public void movePlayer(Turn turn, int resultDice, BoardGUI boardGUI, SideToMove side){
+        if(turn == Turn.RICK){
+            //Updating the box where the player was
+            int position = board.getRickPosition();
+            boolean isSeed = updatePositions(turn, resultDice, boardGUI, position, side);
 
-        /*while(flag){
-            if(turn == Board.Turn.MORTY){
+            //Updating the box where the player will go
+            position = board.getRickPosition();
+            assessSeedState(isSeed, boardGUI, position);
+        } else {
+            //Updating the box where the player was
+            int position = board.getMortyPosition();
+            boolean isSeed = updatePositions(turn, resultDice, boardGUI, position, side);
 
-            } else {
+            //Updating the box where the player will go
+            position = board.getMortyPosition();
+            assessSeedState(isSeed, boardGUI, position);
+        }
+    }
 
-            }
-        }*/
+    /**
+     * This method calls the logical to move players in board, and change the content of the label where the player was
+     * @see com.icesi.model.Board#movePlayer(Turn, int, SideToMove)
+     * @param turn This contains player turns to move
+     * @param resultDice This is the result of the dice
+     * @param boardGUI This contains the board to apply changes
+     * @param position This contains the position where the player is
+     * @param side This is the side which player will move
+     * @return
+     */
+    private boolean updatePositions(Turn turn, int resultDice, BoardGUI boardGUI, int position, SideToMove side){
+        boolean isSeed = board.movePlayer(turn, resultDice, side);
+
+        boardGUI.updateBoardLabel(board.getBox(position).getContent(),position);
+
+        return isSeed;
+    }
+
+    /**
+     * This method assess if the box where the player will move to contain a seed
+     * for in case that box contains it, it removes the image and changes to the position, or in case
+     * that it doesn't contain a seed, it only changes the content to the position
+     * @param isSeed This contains a boolean value, if it's true, it contains a seed and if it's false, it doesn't contain a seed
+     * @param boardGUI This contains the board to apply changes
+     * @param position This contains the position of the label to set content
+     */
+    private void assessSeedState(boolean isSeed, BoardGUI boardGUI, int position){
+        String character = board.getBox(position).getContent();
+        if(isSeed){
+            boardGUI.removeImageLabel(character, position);
+        } else {
+            boardGUI.updateBoardLabel(character, position);
+        }
     }
 
     public Board getBoard() {

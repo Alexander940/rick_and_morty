@@ -41,14 +41,14 @@ public class BoardTest {
 
     @Test
     public void get_last_box() {
-        Box test = board.getBox(board.getHead(), board.getDimension(), 1);
+        Box test = board.getBox(board.getDimension());
 
         assertEquals(board.getDimension(), test.getPosition());
     }
 
     @Test
     public void get_any_box() {
-        Box test = board.getBox(board.getHead(), board.getDimension()/2, 1);
+        Box test = board.getBox(board.getDimension()/2);
 
         assertEquals(board.getDimension()/2, test.getPosition());
     }
@@ -70,7 +70,7 @@ public class BoardTest {
 
         int count = 0;
         for (int i = 1; i < board.getDimension(); i++) {
-            if(board.getBox(board.getHead(), i, 1).isSeed()){
+            if(board.getBox(i).isSeed()){
                 count++;
             }
         }
